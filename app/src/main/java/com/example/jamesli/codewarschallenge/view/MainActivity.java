@@ -11,9 +11,11 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.example.jamesli.codewarschallenge.MyApplication;
 import com.example.jamesli.codewarschallenge.R;
+import com.example.jamesli.codewarschallenge.error.ErrorHandler;
 import com.example.jamesli.codewarschallenge.model.User;
 
 import javax.inject.Inject;
@@ -100,6 +102,8 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Vie
 
     public void handleError(Throwable throwable) {
         hideLoading();
+        String message = getString(ErrorHandler.getMessageFor(throwable));
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
 
     public void showLoading() {
