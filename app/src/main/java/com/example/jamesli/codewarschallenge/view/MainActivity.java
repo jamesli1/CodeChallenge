@@ -14,6 +14,7 @@ import android.widget.ProgressBar;
 
 import com.example.jamesli.codewarschallenge.MyApplication;
 import com.example.jamesli.codewarschallenge.R;
+import com.example.jamesli.codewarschallenge.model.User;
 
 import javax.inject.Inject;
 
@@ -90,6 +91,15 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Vie
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override
+    public void handleResponse(User user) {
+        hideLoading();
+    }
+
+    public void handleError(Throwable throwable) {
+        hideLoading();
     }
 
     public void showLoading() {
