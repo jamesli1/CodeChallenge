@@ -83,7 +83,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     public void addData(User user) {
         mUserList.add(0, user);
         saveUserData(mUserList);
-        notifyItemInserted(0);
+        notifyDataSetChanged();
     }
 
     public void reOrderByRank() {
