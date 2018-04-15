@@ -1,5 +1,6 @@
 package com.example.jamesli.codewarschallenge.di;
 
+import com.example.jamesli.codewarschallenge.interactor.GetAuthoredChallengesInteractor;
 import com.example.jamesli.codewarschallenge.interactor.GetCompletedChallengesInteractor;
 import com.example.jamesli.codewarschallenge.interactor.GetUserInteractor;
 import com.example.jamesli.codewarschallenge.network.CodewarApiService;
@@ -44,5 +45,10 @@ public class ApplicationModule {
     @Provides
     public GetCompletedChallengesInteractor providesGetCompletedChallengesInteractor(Repository repository) {
         return new GetCompletedChallengesInteractor(repository);
+    }
+
+    @Provides
+    public GetAuthoredChallengesInteractor providesGetAuthoredChallengesInteractor(Repository repository) {
+        return new GetAuthoredChallengesInteractor(repository);
     }
 }

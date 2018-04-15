@@ -1,5 +1,6 @@
 package com.example.jamesli.codewarschallenge.di;
 
+import com.example.jamesli.codewarschallenge.view.AuthoredChallengesFragment;
 import com.example.jamesli.codewarschallenge.view.ChallengesActivity;
 import com.example.jamesli.codewarschallenge.view.CompletedChallengesFragment;
 import com.example.jamesli.codewarschallenge.view.MainActivity;
@@ -13,4 +14,6 @@ public interface ApplicationComponent {
     void inject(ChallengesActivity activity);
 
     void inject(CompletedChallengesFragment fragment);
+
+    void inject(AuthoredChallengesFragment fragment);
 }

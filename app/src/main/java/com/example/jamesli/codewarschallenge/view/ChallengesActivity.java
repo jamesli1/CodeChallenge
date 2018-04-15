@@ -52,6 +52,15 @@ public class ChallengesActivity extends AppCompatActivity {
 
                         break;
                     case R.id.action_authored:
+                        bundle = new Bundle();
+                        bundle.putString(Constants.STRING_USERNAME, getIntent().getStringExtra(Constants.STRING_USERNAME));
+
+                        AuthoredChallengesFragment authoredChallengesFragment = AuthoredChallengesFragment.newInstance();
+                        authoredChallengesFragment.setArguments(bundle);
+                        getFragmentManager()
+                                .beginTransaction()
+                                .replace(R.id.container, authoredChallengesFragment)
+                                .commit();
                         break;
                 }
                 return true;
