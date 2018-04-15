@@ -13,4 +13,6 @@ public interface Repository {
     Observable<CompletedChallengeResponse> getCompletedChallenges(String username);
 
     Observable<AuthoredChallengeResponse> getAuthoredChallenges(String username);
+
+    Observable<CompletedChallengeResponse> getCompletedChallengesByPage(String username, int page);
 }

@@ -19,4 +19,7 @@ public interface CodewarApiService {
 
     @GET("api/v1/users/{username}/code-challenges/authored")
     Observable<AuthoredChallengeResponse> getAuthoredChallenges(@Path("username") String username);
+
+    @GET("api/v1/users/{username}/code-challenges/completed")
+    Observable<CompletedChallengeResponse> getCompletedChallengesByPage(@Path("username") String username, @Query("page") int page);
 }

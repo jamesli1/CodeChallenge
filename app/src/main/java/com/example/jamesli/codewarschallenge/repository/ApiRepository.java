@@ -29,4 +29,9 @@ public class ApiRepository implements Repository {
     public Observable<AuthoredChallengeResponse> getAuthoredChallenges(String username) {
         return mCodewarApiService.getAuthoredChallenges(username);
     }
+
+    @Override
+    public Observable<CompletedChallengeResponse> getCompletedChallengesByPage(String username, int page) {
+        return mCodewarApiService.getCompletedChallengesByPage(username, page);
+    }
 }

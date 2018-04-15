@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.example.jamesli.codewarschallenge.MyApplication;
 import com.example.jamesli.codewarschallenge.R;
 import com.example.jamesli.codewarschallenge.error.ErrorHandler;
+import com.example.jamesli.codewarschallenge.listeners.EndlessRecyclerViewScrollListener;
 import com.example.jamesli.codewarschallenge.model.CompletedChallengeResponse;
 import com.example.jamesli.codewarschallenge.model.Constants;
 
@@ -79,6 +80,38 @@ public class CompletedChallengesFragment extends Fragment implements CompletedCh
             intent.putExtra(Constants.STRING_CHALLENGES_DETAIL, completedChallenge);
             startActivity(intent);
         });
+        mRecyclerView.addOnScrollListener(new EndlessRecyclerViewScrollListener((LinearLayoutManager) layoutManager) {
+            @Override
+            public void onLoadMore(int page, int totalItemsCount) {
+                loadMore(page, totalItemsCount);
+            }
+
+            @Override
+            public void onReachEnd(int page) {
+                if (page == mTotalPages || page == 0) {
+                    showNoMoreMessage();
+                }
+            }
+        });
+    }
+
+    private void loadMore(int page, int totalItemsCount) {
+        if (!isLoadingMore) {
+            isLoadingMore = true;
+            mAdapter.addNullItem();
+        }
+        if (page != mTotalPages) {
+            mPresenter.getCompletedChallengesByPage(getArguments().getString(Constants.STRING_USERNAME), page);
+        }
+    }
+
+    private void showNoMoreMessage() {
+        String message = getResources().getString(R.string.no_more);
+        if (mToast != null) {
+            mToast.cancel();
+        }
+        mToast = Toast.makeText(getActivity(), message, Toast.LENGTH_LONG);
+        mToast.show();
     }
 
     @Override
@@ -102,6 +135,13 @@ public class CompletedChallengesFragment extends Fragment implements CompletedCh
         mTotalItems = completedChallengeResponse.getTotalItems();
         mTotalPages = completedChallengeResponse.getTotalPages();
         hideLoading();
+        mAdapter.addData(completedChallengeResponse.getCompletedChallenges());
+    }
+
+    @Override
+    public void handleResponseByPage(CompletedChallengeResponse completedChallengeResponse) {
+        isLoadingMore = false;
+        mAdapter.removeNullItem();
         mAdapter.addData(completedChallengeResponse.getCompletedChallenges());
     }
 
