@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Vie
     ProgressBar mProgressBar;
 
     private SearchView mSearchView;
+    private UserAdapter mAdapter;
 
     @Inject
     MainPresenter mPresenter;
@@ -50,6 +51,10 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Vie
         mRecyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         mRecyclerView.setLayoutManager(layoutManager);
+        mAdapter = new UserAdapter(this);
+        mAdapter.setOnSelectedItemChangeListener(userName -> {
+
+        });
     }
 
     @Override
@@ -88,7 +93,7 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Vie
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_reorder:
-
+                mAdapter.reOrderByRank();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -98,6 +103,8 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Vie
     @Override
     public void handleResponse(User user) {
         hideLoading();
+        mAdapter.addData(user);
+        mRecyclerView.setAdapter(mAdapter);
     }
 
     public void handleError(Throwable throwable) {

@@ -3,4 +3,18 @@
     <string name="tips">Start your search by clicking the top right search icon</string>
     <string name="search">Search</string>
     <string name="reorder">reorder</string>
+
+    <string name="username">Username:\u0020</string>
+    <string name="name">Name:\u0020</string>
+    <string name="rank">Rank:\u0020</string>
+    <string name="score">Score:\u0020</string>
+
+    <!-- Errors message-->
+    <string name="error_network_status">This app needs an internet connection to work - please check and try again.</string>
+    <string name="error_dialog_server_error">Server issues, please try again later</string>
+    <string name="error_message">Oops! Something went wrong.</string>
+    <string name="error_not_found">User not fund, please try again</string>
+    <string name="error_dialog_last_request_was_invalid">Sorry, last request was invalid</string>
+    <string name="error_dialog_conflict_message">Sorry, We are experiencing some data conflict issues.</string>
+
 </resources>
