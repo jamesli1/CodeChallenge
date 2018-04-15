@@ -1,6 +1,7 @@
 package com.example.jamesli.codewarschallenge.view;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -16,6 +17,7 @@ import android.widget.Toast;
 import com.example.jamesli.codewarschallenge.MyApplication;
 import com.example.jamesli.codewarschallenge.R;
 import com.example.jamesli.codewarschallenge.error.ErrorHandler;
+import com.example.jamesli.codewarschallenge.model.Constants;
 import com.example.jamesli.codewarschallenge.model.User;
 
 import javax.inject.Inject;
@@ -53,6 +55,9 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Vie
         mRecyclerView.setLayoutManager(layoutManager);
         mAdapter = new UserAdapter(this);
         mAdapter.setOnSelectedItemChangeListener(userName -> {
+            Intent intent = new Intent(this, ChallengesActivity.class);
+            intent.putExtra(Constants.STRING_USERNAME, userName);
+            startActivity(intent);
 
         });
     }
