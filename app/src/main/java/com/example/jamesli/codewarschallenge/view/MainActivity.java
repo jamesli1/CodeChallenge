@@ -53,6 +53,7 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Vie
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         mRecyclerView.setLayoutManager(layoutManager);
         mAdapter = new UserAdapter(this);
+        mRecyclerView.setAdapter(mAdapter);
         mAdapter.setOnSelectedItemChangeListener(userName -> {
             Intent intent = new Intent(this, ChallengesActivity.class);
             intent.putExtra(Constants.STRING_USERNAME, userName);
@@ -71,6 +72,12 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Vie
     public void onStop() {
         super.onStop();
         mPresenter.stopPresenting();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mAdapter.loadLocalData();
     }
 
     @Override
@@ -108,7 +115,6 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Vie
     public void handleResponse(User user) {
         hideLoading();
         mAdapter.addData(user);
-        mRecyclerView.setAdapter(mAdapter);
     }
 
     public void handleError(Throwable throwable) {

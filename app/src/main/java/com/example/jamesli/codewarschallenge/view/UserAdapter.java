@@ -65,7 +65,8 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
         TextView mRank;
         @BindView(R.id.tv_score)
         TextView mScore;
-        public ViewHolder(View view)  {
+
+        public ViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, itemView);
             itemView.setOnClickListener(this);
@@ -78,6 +79,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
         }
 
     }
+
     public void addData(User user) {
         mUserList.add(0, user);
         saveUserData(mUserList);
@@ -91,6 +93,13 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
         notifyDataSetChanged();
     }
 
+    public void loadLocalData() {
+        if (getUserData() != null) {
+            mUserList = getUserData();
+        }
+        notifyDataSetChanged();
+    }
+
     private User getItem(int itemPosition) {
         return mUserList.get(itemPosition);
     }
@@ -98,14 +107,16 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     private void sortByRank(List<User> users) {
         for (int i = 0; i < users.size(); i++) {
             Collections.sort(users, (ob1, ob2) -> {
-                if (ob1.getRanks().getOverall().getRank().compareTo(ob2.getRanks().getOverall().getRank()) == 0) return 0;
-                else if (ob1.getRanks().getOverall().getRank().compareTo(ob2.getRanks().getOverall().getRank()) > 0) return 1;
+                if (ob1.getRanks().getOverall().getRank().compareTo(ob2.getRanks().getOverall().getRank()) == 0)
+                    return 0;
+                else if (ob1.getRanks().getOverall().getRank().compareTo(ob2.getRanks().getOverall().getRank()) > 0)
+                    return 1;
                 else return -1;
             });
         }
     }
 
-    private void saveUserData(ArrayList<User> userArrayList){
+    private void saveUserData(ArrayList<User> userArrayList) {
         String httpParamJSONList = new Gson().toJson(userArrayList);
         SharedPreferences prefs = mContext.getSharedPreferences(Constants.STRING_USER_ARRAYLIST, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
@@ -113,7 +124,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
         editor.apply();
     }
 
-    private ArrayList<User> getUserData(){
+    private ArrayList<User> getUserData() {
         SharedPreferences prefs = mContext.getSharedPreferences(Constants.STRING_USER_ARRAYLIST, Context.MODE_PRIVATE);
         String httpParamJSONList = prefs.getString(Constants.STRING_USER_ARRAYLIST, "");
         return new Gson().fromJson(httpParamJSONList, new TypeToken<List<User>>() {
