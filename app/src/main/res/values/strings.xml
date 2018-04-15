@@ -13,6 +13,11 @@
     <string name="completed">Completed</string>
     <string name="authored">Authored</string>
 
+    <string name="id">Id:\u0020</string>
+    <string name="slug">Slug:\u0020</string>
+    <string name="completedat">Completed at:\u0020</string>
+    <string name="no_more">All loaded, no more data</string>
+
     <!-- Errors message-->
     <string name="error_network_status">This app needs an internet connection to work - please check and try again.</string>
     <string name="error_dialog_server_error">Server issues, please try again later</string>

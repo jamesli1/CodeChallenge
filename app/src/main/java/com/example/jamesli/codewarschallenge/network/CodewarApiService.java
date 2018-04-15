@@ -1,5 +1,6 @@
 package com.example.jamesli.codewarschallenge.network;
 
+import com.example.jamesli.codewarschallenge.model.CompletedChallengeResponse;
 import com.example.jamesli.codewarschallenge.model.User;
 
 import io.reactivex.Observable;
@@ -11,4 +12,7 @@ public interface CodewarApiService {
 
     @GET("api/v1/users/{username}")
     Observable<User> getUser(@Path("username") String username);
+
+    @GET("api/v1/users/{username}/code-challenges/completed")
+    Observable<CompletedChallengeResponse> getCompletedChallenges(@Path("username") String username);
 }

@@ -1,5 +1,6 @@
 package com.example.jamesli.codewarschallenge.repository;
 
+import com.example.jamesli.codewarschallenge.model.CompletedChallengeResponse;
 import com.example.jamesli.codewarschallenge.model.User;
 import com.example.jamesli.codewarschallenge.network.CodewarApiService;
 
@@ -16,5 +17,10 @@ public class ApiRepository implements Repository {
     @Override
     public Observable<User> getUser(String username) {
         return mCodewarApiService.getUser(username);
+    }
+
+    @Override
+    public Observable<CompletedChallengeResponse> getCompletedChallenges(String username) {
+        return mCodewarApiService.getCompletedChallenges(username);
     }
 }
