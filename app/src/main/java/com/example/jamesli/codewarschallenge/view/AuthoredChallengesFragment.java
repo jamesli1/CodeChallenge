@@ -70,6 +70,11 @@ public class AuthoredChallengesFragment extends Fragment implements AuthoredChal
         mRecyclerView.setLayoutManager(layoutManager);
         mAdapter = new AuthoredChallengesAdapter(getContext());
         mRecyclerView.setAdapter(mAdapter);
+        mAdapter.setOnSelectedItemChangeListener(authoredChallenge -> {
+            Intent intent = new Intent(getContext(), ChallengesDetailActivity.class);
+            intent.putExtra(Constants.STRING_CHALLENGES_DETAIL, authoredChallenge);
+            startActivity(intent);
+        });
     }
 
     @Override

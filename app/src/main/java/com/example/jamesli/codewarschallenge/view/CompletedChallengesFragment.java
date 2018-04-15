@@ -74,9 +74,10 @@ public class CompletedChallengesFragment extends Fragment implements CompletedCh
         mRecyclerView.setLayoutManager(layoutManager);
         mAdapter = new CompletedChallengesAdapter(getContext());
         mRecyclerView.setAdapter(mAdapter);
-
         mAdapter.setOnSelectedItemChangeListener(completedChallenge -> {
-
+            Intent intent = new Intent(getContext(), ChallengesDetailActivity.class);
+            intent.putExtra(Constants.STRING_CHALLENGES_DETAIL, completedChallenge);
+            startActivity(intent);
         });
     }
 
